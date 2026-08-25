@@ -1,0 +1,25 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: backend","Param: editKind","Param: terms"
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,3.094965,0.024364,"us/op",baseline,VALID,1024
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,3.086607,0.027162,"us/op",baseline,VALID,4096
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,3.098988,0.031263,"us/op",baseline,VALID,16384
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,49.595396,1.704492,"us/op",baseline,ERROR,1024
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,187.938120,4.920477,"us/op",baseline,ERROR,4096
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,756.218650,40.200147,"us/op",baseline,ERROR,16384
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,10.768742,0.082434,"us/op",array,VALID,1024
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,31.009955,0.416158,"us/op",array,VALID,4096
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,127.317678,3.278010,"us/op",array,VALID,16384
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,72.354846,3.606017,"us/op",array,ERROR,1024
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,295.965746,8.196791,"us/op",array,ERROR,4096
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,1364.253528,100.256039,"us/op",array,ERROR,16384
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,3.594987,0.039733,"us/op",treap,VALID,1024
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,3.618525,0.017229,"us/op",treap,VALID,4096
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,3.660280,0.073405,"us/op",treap,VALID,16384
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,251.081905,5.613568,"us/op",treap,ERROR,1024
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,1234.399290,22.786456,"us/op",treap,ERROR,4096
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,8504.691203,318.332480,"us/op",treap,ERROR,16384
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,175.852146,1.502342,"us/op",prevFull,VALID,1024
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,693.712884,7.340081,"us/op",prevFull,VALID,4096
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,3089.174822,35.313450,"us/op",prevFull,VALID,16384
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,62.639994,0.359922,"us/op",prevFull,ERROR,1024
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,236.678306,1.427413,"us/op",prevFull,ERROR,4096
+"parserbench.benchmarks.TailBenchmark.edit","avgt",1,15,1011.065775,13.924714,"us/op",prevFull,ERROR,16384

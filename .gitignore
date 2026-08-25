@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.venv/
+venv/
+
+# Gradle and Java
+.gradle/
+**/build/
+bin/
+out/
+*.class
+hs_err_pid*
+replay_pid*
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+
+# Editor files
+*~
+*.swp
+*.swo
+
+# Operating systems
+.DS_Store
+Thumbs.db
