@@ -11,26 +11,23 @@ import java.util.List;
  */
 sealed interface ExprSyntax {
 
-    /** The parse tree node this view was built from. */
     Node node();
 
-    /** Operand and result type of a flattened operator chain. */
+    /** Whether a chain's operands and result are boolean or integer. */
     enum ChainKind { LOGICAL, ARITHMETIC }
 
-    /** A literal whose type is fixed by its spelling. */
     record Literal(Node node, Type type) implements ExprSyntax {}
 
-    /** A reference to a named definition. */
     record Name(Node node, Node id) implements ExprSyntax {}
 
     /** sizeof T */
     record SizeOf(Node node, Node type) implements ExprSyntax {}
 
-    /** E1 , ... , En — types as its last element. */
+    /** E1 , ... , En; takes its type from the last element. */
     record Seq(Node node, List<Node> items) implements ExprSyntax {}
 
-    /** A parenthesised sequence, which keeps the element's attributes. */
-    record Group(Node node, Node items) implements ExprSyntax {}
+    /** ( E1 , ... , En ); takes the sequence's attributes unchanged. */
+    record Group(Node node, Node inner) implements ExprSyntax {}
 
     /** lhs = rhs */
     record Assign(Node node, Node target, Node value) implements ExprSyntax {}
@@ -41,10 +38,10 @@ sealed interface ExprSyntax {
     /** a op b op c for one precedence level, already flattened by the parser. */
     record Chain(Node node, ChainKind kind, List<Node> operands) implements ExprSyntax {}
 
-    /** a == b, a < b, ... — never chained. */
+    /** a == b, a < b, ...; never chained. */
     record Compare(Node node, Node left, Node right) implements ExprSyntax {}
 
-    /** !E, +E, -E, ^E; op is kept for its diagnostic. */
+    /** not E, +E, -E, ^E; op is kept for its diagnostic. */
     record Unary(Node node, Node op, Node operand) implements ExprSyntax {}
 
     /** A primary expression followed by its call/index/deref/member tail. */
@@ -53,10 +50,10 @@ sealed interface ExprSyntax {
     /** while C do B end */
     record While(Node node, Node condition, Node body) implements ExprSyntax {}
 
-    /** if C then B [else E] end; otherwise is null when there is no else part. */
+    /** if C then B [else E] end, otherwise is null when there is no else part. */
     record If(Node node, Node condition, Node then, Node otherwise) implements ExprSyntax {}
 
-    /** let defs in B end — definitions are resolved by the definition pass. */
+    /** let defs in B end, definitions are resolved by the definition pass. */
     record Let(Node node, Node body) implements ExprSyntax {}
 
     /** An incomplete or error-recovered subtree. */
@@ -73,7 +70,7 @@ sealed interface ExprSyntax {
         record Unknown(Node prime) implements Step {}
     }
 
-    /** Accepts any expression-level node; descends through pass-through precedence levels. */
+    /** Accepts any expression-level node, skipping levels that hold a single operand. */
     static ExprSyntax of(Node node) {
         return switch (node.symbol) {
             case EXPRS, EEXPRS -> new Seq(node, operands(node));
@@ -135,7 +132,7 @@ sealed interface ExprSyntax {
         };
     }
 
-    /** A precedence level that turned out to hold exactly one operand. */
+    /** Unwraps a precedence level to its only child. */
     private static ExprSyntax descend(Node node) {
         Node only = TypeNav.firstChildOrNull(node);
 
@@ -201,7 +198,7 @@ sealed interface ExprSyntax {
         };
     }
 
-    /** Flattens the right-recursive postfix_expr' spine into the tail it spells. */
+    /** Flattens the right-recursive postfix_expr' spine into a list of steps. */
     private static List<Step> steps(Node prime) {
         List<Step> steps = new ArrayList<>();
 

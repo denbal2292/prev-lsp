@@ -43,10 +43,6 @@ class TypeStore {
         return nameTypes.computeIfAbsent(defNode.id, _ -> new Type.NameType(defNode.value, defNode));
     }
 
-    /**
-     * Installs a fresh cell for a typedef about to be re-resolved, so the previous one keeps the
-     * shape the last generation computed.
-     */
     Type.NameType freshNameType(Node defNode) {
         Type.NameType fresh = new Type.NameType(defNode.value, defNode);
         nameTypes.put(defNode.id, fresh);

@@ -382,7 +382,9 @@ public class TypeChecker {
         // Body vs. return type check
         Type bodyType = bodyAttrs.type();
         if (store.defType(defn) instanceof Type.FunType funType && !funType.returnType().isEquivalentTo(bodyType)) {
-            currentDiagnostics.add(new TypeDiagnostic(body.getChildren().getLast(), "Function returns " + bodyType + ", expected " + funType.returnType()));
+            // FUN ID ( EPARAMS ) : TYPE fun_body
+            Node retTypeNode = TypeNav.lastChild(owner, Symbol.TYPE);
+            currentDiagnostics.add(new TypeDiagnostic(retTypeNode, "Function returns " + bodyType + ", expected " + funType.returnType()));
         }
 
         if (currentDiagnostics.isEmpty()) {
